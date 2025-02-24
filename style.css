@@ -1,12 +1,28 @@
-body {
-    font-family: Arial, sans-serif;
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    font-family: 'Poppins', sans-serif;
     text-align: center;
+    background: rgb(238,174,202);
+    background: radial-gradient(circle, rgba(238,174,202,1) 0%, rgba(148,187,233,1) 100%);
+
 }
+ #quiz-container:hover {
+    transform: scale(1.05); /* Agrandit légérement le conteneur au survol */
+}
+
 #quiz-container {
-    padding: 60px;
-    margin: 20px auto;
+    background: white;
+    border-radius: 15px;
+    padding: 50px;
+    margin: 100px auto;
     width: 50%;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
 }
+
 .question {
     font-size: 1.2em;
     margin-bottom: 15px;
@@ -18,7 +34,29 @@ body {
     padding: 10px;
     font-size: 1em;
     cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
+
+.option-button:hover {
+    transform: scale(1.05);
+}
+
+.option-button:active {
+    transform: scale(0.95);
+}
+
+/* ✅ Effet bonne réponse */
+.option-button.correct {
+    background: #4CAF50;
+    animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
+
 .button-style {
     padding: 10px 15px;
     font-size: 1em;

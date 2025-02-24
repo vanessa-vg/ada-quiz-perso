@@ -10,7 +10,7 @@ const questionContainer = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const nextButton = document.getElementById('next-button');
 const replayButton = document.getElementById('replay-button');
-
+b
 // Fonction pour afficher une question basée sur l'index actuel
 function loadQuestion() {
     // Vider le conteneur des options
@@ -53,6 +53,10 @@ nextButton.addEventListener('click' , () => {
     } else {
         // Si plus de questions, indiquer la fin du quiz
         questionContainer.innerText = `Quiz terminé ! 🎉 Score final: ${score}/${quiz_culture_g.questions.length}`;
+        function lancerConfettis() {
+            confetti();
+        }
+        lancerConfettis();
         let message = '';
         if (score === quiz_culture_g.questions.length) {
             message = 'Bravo ! Parfait 🎯';
@@ -61,6 +65,7 @@ nextButton.addEventListener('click' , () => {
         } else {
             message = 'Peut mieux faire 💪';
         }
+
         optionsContainer.innerText = ''; // Effacer les options
         nextButton.style.display = 'none'; // Cacher le bouton Suivant
         replayButton.style.display = 'inline-block'; // Afficher le bouton Rejouer
@@ -78,7 +83,7 @@ replayButton.addEventListener('click' , () => {
 
     // Cacher le bouton rejouer et afficher le bouton Suivant
     replayButton.style.display = 'none';
-    nextButton.style.display = 'inline-block'
+    nextButton.style.display = 'inline-block';
 
     // Recharger la première question
     loadQuestion();
@@ -99,6 +104,11 @@ function checkAnswer(button, correct_answer) {
         score++;
     } else {
         button.style.border = '3px solid red';
+        allButtons.forEach( btn => {
+            if (btn.innerText.trim() === correct_answer.trim()) {
+                btn.style.border = '3px solid green';
+            }
+        });
     }
     //Affiche le score après chaque question (optionnel)
     console.log(`Score actuel: ${score}`);
