@@ -10,7 +10,10 @@ const questionContainer = document.getElementById('question-text');
 const optionsContainer = document.getElementById('options-container');
 const nextButton = document.getElementById('next-button');
 const replayButton = document.getElementById('replay-button');
-b
+const goodAnswerSound = document.getElementById('good-answer');
+const wrongAnswerSound = document.getElementById('wrong-answer');
+const endSound = new Audio('/sounds/congrats.wav');
+
 // Fonction pour afficher une question basée sur l'index actuel
 function loadQuestion() {
     // Vider le conteneur des options
@@ -52,6 +55,7 @@ nextButton.addEventListener('click' , () => {
         loadQuestion();
     } else {
         // Si plus de questions, indiquer la fin du quiz
+        endSound.play();
         questionContainer.innerText = `Quiz terminé ! 🎉 Score final: ${score}/${quiz_culture_g.questions.length}`;
         function lancerConfettis() {
             confetti();
@@ -100,12 +104,14 @@ function checkAnswer(button, correct_answer) {
     allButtons.forEach(btn => btn.disabled = true);
 
     if (button.innerText.trim() === correct_answer.trim()) {
+        goodAnswerSound.play();
         button.style.border = '3px solid green';
         score++;
     } else {
         button.style.border = '3px solid red';
         allButtons.forEach( btn => {
             if (btn.innerText.trim() === correct_answer.trim()) {
+                wrongAnswerSound.play();
                 btn.style.border = '3px solid green';
             }
         });
